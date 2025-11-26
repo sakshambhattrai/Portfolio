@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saksham Bhattrai | Mechanical Engineering Portfolio</title>
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: { 850: '#1e293b' },
+                        eng: { blue: '#005BBB' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'dot-pattern': "radial-gradient(currentColor 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- GSAP Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 overflow-x-hidden">
+
+    <!-- Background Animation -->
+    <canvas id="grid-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 backdrop-blur-md bg-white/70 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold tracking-tight hover:text-sky-600 dark:hover:text-sky-400 transition-colors">SB<span class="text-sky-600 dark:text-sky-400">.</span></a>
+            <div class="flex items-center gap-8">
+                <div class="hidden md:flex gap-6 text-sm font-medium text-slate-600 dark:text-slate-300">
+                    <a href="#projects" class="hover:text-sky-600 dark:hover:text-sky-400">Projects</a>
+                    <a href="#skills" class="hover:text-sky-600 dark:hover:text-sky-400">Skills</a>
+                    <a href="#experience" class="hover:text-sky-600 dark:hover:text-sky-400">Experience</a>
+                </div>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors">
+                    <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moon-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PROJECT DETAIL MODAL -->
+    <div id="project-modal" class="project-modal fixed inset-0 z-50 bg-white dark:bg-slate-900 w-full h-full flex flex-col">
+        <button onclick="closeModal()" class="absolute top-6 right-6 z-50 p-2 bg-slate-100 dark:bg-slate-800 rounded-full hover:rotate-90 transition-transform duration-300">
+            <svg class="w-6 h-6 text-slate-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <div class="modal-scroll flex-1 overflow-y-auto w-full">
+            <div class="max-w-6xl mx-auto px-6 py-20">
+                <div id="modal-content" class="grid grid-cols-1 lg:grid-cols-12 gap-12 opacity-0 translate-y-8 transition-all duration-500">
+                    <!-- Dynamic Content Injected via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="min-h-[90vh] flex items-center justify-center pt-20">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="gsap-hero opacity-0 translate-y-4">
+                <span class="font-mono text-sky-600 dark:text-sky-400 text-sm font-semibold tracking-wider uppercase mb-3 block">Mechanical Engineering Student</span>
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-slate-900 dark:text-white">Saksham Bhattrai</h1>
+                <p class="text-lg md:text-xl text-slate-700 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed mb-8 font-light">
+                    Specializing in <strong class="text-slate-900 dark:text-slate-200">Aerospace Design</strong>, <strong class="text-slate-900 dark:text-slate-200">CAD Modeling</strong>, and <strong class="text-slate-900 dark:text-slate-200">Robotics</strong>.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="#projects" class="bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 rounded-md font-semibold shadow-lg shadow-sky-200 dark:shadow-none transition-all w-full sm:w-auto">View Projects</a>
+                    <a href="mailto:Sakshambhattrai17@gmail.com" class="bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 px-8 py-3 rounded-md font-medium hover:border-sky-500 hover:text-sky-600 dark:hover:text-white transition-all w-full sm:w-auto">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 px-6 bg-slate-100/50 dark:bg-slate-800/30">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center gap-4 mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Featured Projects</h2>
+                <div class="h-px flex-1 bg-slate-300 dark:bg-slate-700"></div>
+            </div>
+            <!-- Grid Container for Projects -->
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+        </div>
+    </section>
+
+    <!-- Skills, Experience & Extracurriculars -->
+    <section id="skills" class="py-24 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-dot-pattern opacity-[0.03] pointer-events-none text-slate-500"></div>
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
+            
+            <!-- Left Column: Skills -->
+            <div class="lg:col-span-5">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 border-l-4 border-sky-500 pl-4">Technical Arsenal</h2>
+                <div class="space-y-8 bg-white dark:bg-slate-850/50 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3">Engineering Software</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">SolidWorks</span>
+                            <span class="skill-tag">XFLR5</span>
+                            <span class="skill-tag">OpenLCA</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3">Programming</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">MATLAB</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C++</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column: Experience & Extracurriculars -->
+            <div id="experience" class="lg:col-span-7 space-y-16">
+                
+                <!-- Experience Section -->
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 border-l-4 border-slate-300 dark:border-slate-600 pl-4">Experience</h2>
+                    <div class="space-y-10 relative border-l border-slate-200 dark:border-slate-800 ml-2 pl-8 pb-4">
+                        <!-- Freelance -->
+                        <div class="relative group">
+                            <span class="absolute -left-[37px] top-1.5 w-4 h-4 rounded-full bg-sky-500 border-4 border-slate-50 dark:border-slate-900 transition-transform group-hover:scale-110"></span>
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white">Freelance Graphic Designer</h4>
+                            <p class="text-sm text-sky-600 dark:text-sky-400 font-mono mb-2">Aug 2022 – Present</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">Delivered 30+ unique designs (menus, posters) for restaurants. Met client branding goals ensuring 100% satisfaction.</p>
+                        </div>
+                        <!-- Day Camp -->
+                        <div class="relative group">
+                            <span class="absolute -left-[37px] top-1.5 w-4 h-4 rounded-full bg-slate-300 dark:bg-slate-700 border-4 border-slate-50 dark:border-slate-900 transition-transform group-hover:scale-110 group-hover:bg-sky-500"></span>
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white">Day Camp Leader</h4>
+                            <p class="text-sm text-slate-500 font-mono mb-2">Jun 2022 – Dec 2022</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">West End Community Centre. Supervised children, planned activities, and ensured safety protocols.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extracurriculars Section -->
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 border-l-4 border-slate-300 dark:border-slate-600 pl-4">Extracurriculars</h2>
+                    <div class="space-y-10 relative border-l border-slate-200 dark:border-slate-800 ml-2 pl-8 pb-4">
+                        
+                        <!-- UBCO Aerospace -->
+                        <div class="relative group">
+                            <span class="absolute -left-[37px] top-1.5 w-4 h-4 rounded-full bg-sky-500 border-4 border-slate-50 dark:border-slate-900"></span>
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white">Fixed Wing Subteam Member</h4>
+                            <p class="text-sm text-slate-500 font-mono mb-2">Sep 2024 – Present</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">UBCO Aerospace. Designed wing deployment for Mach 1.7 glider. STOL Aircraft analysis.</p>
+                        </div>
+
+                        <!-- STEM Engagement -->
+                        <div class="relative group">
+                            <span class="absolute -left-[37px] top-1.5 w-4 h-4 rounded-full bg-slate-300 dark:bg-slate-700 border-4 border-slate-50 dark:border-slate-900"></span>
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white">UBCO STEM Engagement Day</h4>
+                            <p class="text-sm text-slate-500 font-mono mb-2">Nov 2025</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">Aerospace Club Outreach. Presented basic flight principles to grade 3-4 students and led hands-on paper airplane workshops.</p>
+                        </div>
+
+                        <!-- Interact Club -->
+                        <div class="relative group">
+                            <span class="absolute -left-[37px] top-1.5 w-4 h-4 rounded-full bg-slate-300 dark:bg-slate-700 border-4 border-slate-50 dark:border-slate-900"></span>
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white">Interact Club (Treasurer)</h4>
+                            <p class="text-sm text-slate-500 font-mono mb-2">Sep 2021 – Dec 2023</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">King George Secondary. Executed 4 projects including glasses donations and increased participation by 15%.</p>
+                        </div>
+
+                        <!-- Youth Leadership -->
+                        <div class="relative group">
+                            <span class="absolute -left-[37px] top-1.5 w-4 h-4 rounded-full bg-slate-300 dark:bg-slate-700 border-4 border-slate-50 dark:border-slate-900"></span>
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white">Youth Leadership</h4>
+                            <p class="text-sm text-slate-500 font-mono mb-2">Oct 2021 – Dec 2023</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">West End Community Centre. Coordinated 6 fundraisers engaging 500+ attendees.</p>
+                        </div>
+
+                         <!-- Grad Committee -->
+                         <div class="relative group">
+                            <span class="absolute -left-[37px] top-1.5 w-4 h-4 rounded-full bg-slate-300 dark:bg-slate-700 border-4 border-slate-50 dark:border-slate-900"></span>
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white">Grad Committee</h4>
+                            <p class="text-sm text-slate-500 font-mono mb-2">Oct 2022 – Dec 2022</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">Planned grad dinner/dance for 100+ attendees; managed/delegated a team of 10.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900">
+        <div class="max-w-4xl mx-auto text-center px-6">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Let's Connect</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">Open to Engineering Internships for Summer 2025</p>
+            <div class="flex justify-center gap-6 items-center">
+                <a href="mailto:Sakshambhattrai17@gmail.com" class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Email</a>
+                <span class="text-slate-300">|</span>
+                <a href="https://www.linkedin.com" target="_blank" class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">LinkedIn</a>
+            </div>
+            <p class="text-slate-400 text-xs mt-10">© 2024 Saksham Bhattrai</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/project-data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
