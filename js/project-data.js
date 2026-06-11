@@ -9,10 +9,10 @@ const projectData = [
         subtitle: "Electromechanical Design & Manufacturing",
         image: "assets/Motor 1.png",
         tags: ["Electromagnetism", "Assembly", "Soldering", "3D Printing"],
-        shortDesc: "Designed, wound, and assembled a custom 9-slot, 24-pole (9S24P) brushless DC motor.",
+        shortDesc: "Designed and manufactured a custom 9-slot, 24-pole (9S24P) brushless DC motor featuring a 3D-printed stator and free-floating bearing design.",
         fullDesc: `
             <p class="mb-4 text-slate-700 dark:text-slate-300">
-                <strong>Project Overview:</strong> As part of an engineering design team, we manufactured a functional Brushless DC (BLDC) motor from scratch. The motor utilizes a 9-slot, 24-pole (9S24P) configuration and is powered by a 22.5V supply and a 30A Electronic Speed Controller (ESC).
+                <strong>Project Overview:</strong> Designed and manufactured a functional Brushless DC (BLDC) motor from scratch. The motor utilizes a 9-slot, 24-pole (9S24P) configuration and is powered by a 22.5V supply and a 30A Electronic Speed Controller (ESC).
             </p>
             <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-6 mb-2">Technical Highlights</h3>
             <ul class="list-disc pl-5 space-y-2 text-slate-700 dark:text-slate-300">
