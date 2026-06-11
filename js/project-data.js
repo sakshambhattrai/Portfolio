@@ -7,7 +7,7 @@ const projectData = [
         id: 'motor',
         title: "Custom BLDC Motor",
         subtitle: "Electromechanical Design & Manufacturing",
-        image: "assets/motor 1.png",
+        image: "assets/Motor 1.png",
         tags: ["Electromagnetism", "Assembly", "Soldering", "3D Printing"],
         shortDesc: "Designed, wound, and assembled a custom 9-slot, 24-pole (9S24P) brushless DC motor.",
         fullDesc: `
@@ -30,7 +30,7 @@ const projectData = [
         <video class="w-full aspect-square rounded-lg object-cover border border-slate-700 shadow-2xl" src="assets/motor vid.mp4" autoplay loop muted playsinline controls></video>
         `,
         gallery: [
-            { url: "assets/motor 2.png", caption: "Motor design, magnetic flux testing, and assembly details" }
+            { url: "assets/Motor 2.png", caption: "Motor design, magnetic flux testing, and assembly details" }
         ]
     }, {
         id: 'plane',
